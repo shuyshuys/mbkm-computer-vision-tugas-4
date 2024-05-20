@@ -29,19 +29,18 @@ app = Flask(__name__)
 def home():
     return jsonify({"message": "Welcome to the Flask API!"}), 200
 
+@app.route('/api/prakiraan-cuaca/<region>', methods=['GET'])
+def get_data(region):
+    url = f'https://data.bmkg.go.id/DataMKG/MEWS/DigitalForecast/DigitalForecast-{region}.xml'
+    data = convert_xml_to_json(url)
+    data_dict = json.loads(data)    
+    return jsonify(data_dict), 200
+
 @app.route('/api/data/jakarta', methods=['GET'])
 def get_data_jakarta():
     url = 'https://data.bmkg.go.id/DataMKG/MEWS/DigitalForecast/DigitalForecast-DKIJakarta.xml'
     data = convert_xml_to_json(url)
-    #data = {"key": "value"}  # Replace this with your actual data
     url = 'https://data.bmkg.go.id/DataMKG/MEWS/DigitalForecast/DigitalForecast-DKIJakarta.xml'
-    # response = requests.get(url, headers=headers)
-    # response = requests.get(url)
-
-    # The data from the response
-    # data = response.text
-    # data = data.replace('\n', '').replace('\t', '').replace('\\', '')
-    # data = data.replace("\\", "")
 
     data_dict = json.loads(data)    
     return jsonify(data_dict), 200
