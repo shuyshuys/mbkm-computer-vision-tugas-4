@@ -1,0 +1,5 @@
+# requirement for setup flask api
+flask
+flask-restful
+requests
+xmltodict
