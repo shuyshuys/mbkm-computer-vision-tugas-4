@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Pull the latest changes from the repository
+git pull
+
 # Check if the virtual environment exists
 if [ ! -d "env" ]; then
   # Create the virtual environment
@@ -11,9 +14,6 @@ source env/bin/activate
 
 # Install the required packages
 pip install -r requirements.txt
-
-# Pull the latest changes from the repository
-git pull
 
 # Run the application
 python3 app.py
