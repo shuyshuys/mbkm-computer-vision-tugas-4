@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 import requests
 import xmltodict
 import json
@@ -32,6 +32,7 @@ def home():
     return jsonify({"message": "Welcome to the Flask API!"}), 200
 
 @app.route('/api/prakiraan-cuaca/<region>', methods=['GET'])
+@cross_origin()
 def get_data(region):
     url = f'https://data.bmkg.go.id/DataMKG/MEWS/DigitalForecast/DigitalForecast-{region}.xml'
     data = convert_xml_to_json(url)
